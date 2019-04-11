@@ -19,7 +19,8 @@
 
 int askMenu() {
 	int menu;
-
+	
+	printf("\n");
 	printf("Menu: \n");
 	printf("1. Buat Proyek Baru \n");
 	printf("2. Muat Proyek dari Berkas \n");
@@ -33,6 +34,7 @@ int askMenu() {
 int askMenuUtama() {
 	int menuutama;
 	
+	printf("\n");
 	printf("[Menu Utama] \n");
 	printf("Pilih Mode: \n");
 	printf("1. Tampilkan Layout \n");
@@ -64,13 +66,19 @@ int main() {
 		} 
 
 		if(Menu == 1) {
+			printf("\n");
 			printf("====== Membuat Proyek Baru ======\n");
 			printf("Masukkan nama proyek : ");
 			scanf("%s", namaProyek);
 			printf("Masukkan ukuran PCB NxM (N,M < 40) : ");
 			scanf("%d %d", &brs, &klm);
-			printf("\n");
-
+			
+			while ((brs < 1) || (brs > 39) || (klm < 1) || (klm > 39)) {
+				printf("Ukuran PCB tidak tepat! Ukuran PCB harus diantara 0 dan 40\n");
+				printf("Masukkan ukuran PCB NxM (N,M < 40) : ");
+				scanf("%d %d", &brs, &klm);
+			}
+			
 			//inisialisasi array layout kosong
 			for(int i = 0; i < 40; i++) {
 				for(int j = 0; j < 40; j++) {
@@ -79,8 +87,8 @@ int main() {
 			}
 
 			//inisialisasi array routing kosong
-			for(int i = 0; i < brs; i++) {
-				for(int j = 0; j < klm; j++) {
+			for(int i = 0; i < 40; i++) {
+				for(int j = 0; j < 40; j++) {
 					routing[i][j] = ' ';
 				}
 			}
@@ -93,27 +101,44 @@ int main() {
 			
 			while(MenuUtama != 8){
 				if(MenuUtama==1) {
+					printf("\n");
 					printMatrix(layout,brs,klm);
 					MenuUtama = askMenuUtama();
 				}
 				else if(MenuUtama==2) {
+					printf("\n");
 					interfaceLayout(&komponen, layout, brs, klm);
 					MenuUtama = askMenuUtama();
 				}
 				else if (MenuUtama==3) {
+					printf("\n");
 					tampilkanRouting(routing, brs, klm);
 					MenuUtama = askMenuUtama();
 				}
 				else if (MenuUtama==4) {
+					printf("\n");
 					routingManual(routing,klm,brs);
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==5) {
+					printf("---Menu Layout Otomatis saat ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==6) {
+					printf("---Menu Routing Otomatis saat ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==7) {
+					printf("---Menu Design Rule Checker saat ini tidak tersedia---\n");
 					MenuUtama = askMenuUtama();
 				}
 			}
 			save_program(layout,klm,brs);
+			printf("Proyek telah disimpan\n");
 		}
 
 		else if(Menu == 2) {
-			load(layout, routing);
+			loadProject(layout, routing);
 			
 			MenuUtama = askMenuUtama();
 			while ((MenuUtama < 1) || (MenuUtama > 8)) {
@@ -123,23 +148,40 @@ int main() {
 			
 			while(MenuUtama != 8){
 				if(MenuUtama==1) {
-					printMatrix(layout,brs,klm);
+					printf("\n");
+					printMatrix(layout,brs,klm);	
 					MenuUtama = askMenuUtama();
 				}
 				else if(MenuUtama==2) {
+					printf("\n");
 					interfaceLayout(&komponen, layout, brs, klm);
 					MenuUtama = askMenuUtama();
 				}
 				else if (MenuUtama==3) {
+					printf("\n");
 					tampilkanRouting(routing, brs, klm);
 					MenuUtama = askMenuUtama();
 				}
 				else if (MenuUtama==4) {
+					printf("\n");
 					routingManual(routing,klm,brs);
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==5) {
+					printf("---Menu Layout Otomatis saat ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==6) {
+					printf("---Menu Routing Otomatis saat ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
+				else if(MenuUtama==7) {
+					printf("---Menu Design Rule Checker saat ini tidak tersedia---\n");
 					MenuUtama = askMenuUtama();
 				}
 			}
 			save_program(layout,klm,brs);
+			printf("Proyek telah disimpan\n");
 		}
 	} while(Menu != 3); 
 
