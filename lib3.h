@@ -6,6 +6,6 @@
 
 void tampilkanLayout(char layout[40][40][2], int brs, int klm);
 void tampilkanRouting(char routing[40][40], int brs, int klm);
-void loadProject(char l[40][40][3], char r[40][40], char nama[20]);
+void load(char PCB_layout[40][40][6], char PCB_routing[40][40], int PCB_lebar, int PCB_panjang);
 #endif
 

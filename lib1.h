@@ -13,7 +13,7 @@ typedef struct{
     koordinat_t koor1, koor2, koor3;
 }component_t;
 
-void interfaceLayout(component_t *c,char matrix[40][40][3],int baris, int kolom);
-void printMatrix(char matr[40][40][3], int row, int col);
+void interfaceLayout(component_t *c,char matrix[40][40][6],int baris, int kolom);
+void printMatrix(char matr[40][40][6], int row, int col);
 #endif
 

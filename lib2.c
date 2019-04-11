@@ -28,7 +28,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 	printf("Pilih simbol (!,@,#,$,%,^,&,*,(,)) : ");
 	scanf("%c",&temp);
 	scanf("%c",&simbol);
-	
+
 	valid=validasi_simbol(simbol);
 
 	while(valid == 0){
@@ -47,9 +47,8 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 	i=0;
 	while(strcmp(arr[i-1],"Q")||strcmp(arr[i-1],"q")){
 		printf("Koordinat y,x : ");
-		scanf("%s",point);
+		scanf("%s",&point);
 		scanf("%c",&temp);
-
 		strcpy(arr[i],point);
 		// ngecek kalo udah diubah variabelnya dari point ke integer
 		// ketika pengguna memasukkan input koordinat n, maka akan memulai noda baru dengan membuat i = 0
@@ -61,12 +60,12 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 			while(valid == 0){
 				printf("Simbol yang dipilih tidak tepat, input kembali simbol : ");
 				printf("Pilih simbol (!,@,#,$,%,^,&,*,(,)) : ");
-				scanf("%c",&simbol);
+				scanf("%c",simbol);
 				valid = validasi_simbol(simbol);
 			}
 			printf("Koordinat x, y : ");
 			i=0;
-			scanf("%s",point);
+			scanf("%s",&point);
 			scanf("%c",&temp);
 			strcpy(arr[i],point);
 			N = strlen (arr[i]);
@@ -83,6 +82,9 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 			printf("koordinat y, x  adalah: %d, %d \n", koordinat[i].y, koordinat[i].x); // ngecek kalo udah diubah variabelnya dari point ke integer
 			i=i+1;
 			// INPUT KEMBALI KOORDINAT PADA NODA BARU
+		}
+		else if(strcmp(point,"q")==0 || strcmp(point,"Q")==0) {
+			break;
 		}
 		else {
 			N = strlen (arr[i]);
@@ -115,12 +117,12 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 						valid = 1;
 					}
 					else if (!strcmp(arr[i-1],"Q") || !strcmp(arr[i-1],"q")){ // ketika inputan n ia akan ke noda baru
-						break;
+						valid =1;
 					}
 					else {
 						printf("titik koordinat yang dipilih berada di noda berbeda, input kembali koordinat :\n");
 						printf("Koordinat y, x: ");
-						scanf("%s",point);
+						scanf("%s",&point);
 						strcpy(arr[i-1],point);
 						scanf("%c",&temp);
 						N = strlen (arr[i-1]);
@@ -128,7 +130,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 						while(idx_size<N){
 							if( arr[i-1][idx_size] != ','){
 								idx_size = idx_size+1;
-							}	
+							}
 							else {
 								arr[i-1][idx_size]= ' ';
 							}
@@ -149,36 +151,36 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 					for(kolom=koordinat[i-2].y ; kolom<=koordinat[i-1].y; kolom++){
 						if(koordinat[i-2].x<koordinat[i-1].x){
 							for(baris=koordinat[i-2].x ; baris<=koordinat[i-1].x; baris++){
-								PCB_routing[kolom][baris]= simbol;	
+								PCB_routing[kolom][baris]= simbol;
 							}
 						}
 						else{
 							for(baris=koordinat[i-1].x ; baris<=koordinat[i-2].x; baris++){
-								PCB_routing[kolom][baris]= simbol;	
+								PCB_routing[kolom][baris]= simbol;
 							}
 						}
 					}
 				}
-				
+
 				else{
 					for(kolom=koordinat[i-1].y ; kolom<=koordinat[i-2].y; kolom++){
 						if(koordinat[i-2].x<koordinat[i-1].x){
 							for(baris=koordinat[i-2].x ; baris<=koordinat[i-1].x; baris++){
-								PCB_routing[kolom][baris]= simbol;	
+								PCB_routing[kolom][baris]= simbol;
 							}
 						}
 						else{
 							for(baris=koordinat[i-1].x ; baris<=koordinat[i-2].x; baris++){
-								PCB_routing[kolom][baris]= simbol;	
+								PCB_routing[kolom][baris]= simbol;
 							}
 						}
 					}
-					
+
 				}
-				
-				for(kolom=0;kolom<=10;kolom++){
+
+				for(kolom=0;kolom<=PCB_panjang;kolom++){
 					printf("%d", kolom);
-					for(baris=0;baris<=10;baris++){
+					for(baris=0;baris<=PCB_lebar;baris++){
 						if(kolom == 0 && baris == 0){
 							printf("\t");
 						}
@@ -187,7 +189,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 								printf("%d\t", baris);
 							}
 							else {
-								printf("%c\t",PCB_routing[kolom][baris]); 
+								printf("%c\t",PCB_routing[kolom][baris]);
 							}
 						}
 					}
@@ -198,40 +200,39 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 
 	}
 	printf("menu baru\n");
-	
-}	
 
-void save_program(char PCB_layout [40][40][3], char PCB_routing [40][40], int PCB_lebar, int PCB_panjang, char n[20]){
-	char nl[30], nr[30];
+}
+
+void save_program(char PCB_layout [40][40][6],char PCB_routing[40][40]  ,int PCB_lebar, int PCB_panjang){
+	char nama[100], namaL[100], namaR[100];
 	int i,j;
-	
-	strcpy(nl, n);
-	strcpy(nr, n);
-	
-	strcat(nl, "_layout.csv");
-	FILE *fin=fopen(nl,"w+");
+
+	printf("Masukkan nama File untuk disimpan: ");
+	scanf("%s",&nama);
+	strcpy(namaL,nama);
+	strcpy(namaR,nama);
+	strcat(namaL,"_layout.csv");
+	strcat(namaR,"_routing.csv");
+
+	FILE *fin=fopen(namaL,"w");
 
 	for (i=0;i<=PCB_panjang;i++){
 		for(j=0;j<=PCB_lebar;j++){
-			fprintf(fin,"%s;",PCB_layout[i][j]);
+			fprintf(fin,"%s,",PCB_layout[i][j]);
 		}
 		fprintf(fin,"\n");
 	}
 	fclose(fin);
-	printf("Proyek layout telah disimpan sebagai %s\n", nl);
-	
-	strcat(nr, "_routing.csv");
-	FILE *finn=fopen(nr,"w+");
+
+	FILE *finn=fopen(namaR,"w");
 	for(i=0;i<=PCB_panjang;i++){
 		for(j=0;j<=PCB_lebar;j++){
-			fprintf(finn,"%c;",PCB_routing[i][j]);
+			fprintf(finn," %c,",PCB_routing[i][j]);
 		}
 		fprintf(finn,"\n");
 	}
 	fclose(finn);
-	printf("Proyek routing telah disimpan sebagai %s\n", nr);
 }
-
 int validasi_simbol(char simbol){
 	if (simbol =='!'||simbol =='@'||simbol =='#'||simbol =='$'||simbol =='%'||simbol =='^'||simbol =='&'||simbol =='*'||simbol =='('||simbol ==')'){
 		return 1;
