@@ -91,14 +91,14 @@ void load(char PCB_layout[40][40][6], char PCB_routing[40][40],int PCB_lebar,int
 	PCB_lebar = lebar;
 	PCB_panjang = kolom;
 	//ngeprint
-	   for(k = 0; k<=kolom; k++) {
+	   for(k = 0; k<kolom; k++) {
 		printf("%d\t", k);
 	}
 	printf("\n");
-	for(i=0;i<=baris;i++){
+	for(i=1;i<baris;i++){
             printf("%d\t", i);
 		for(j=0;j<=kolom;j++){
-			printf("%s\t",PCB_layout[i][j]);
+			printf("%s\t",PCB_layout[i][j+1]);
 		}
 		printf("\n");
 	}
@@ -149,14 +149,14 @@ void load(char PCB_layout[40][40][6], char PCB_routing[40][40],int PCB_lebar,int
 		i++;
 	}
 	//ngeprint
-	for(k = 0; k<= kolom; k++) {
+	for(k = 0; k< kolom; k++) {
 		printf("%d\t", k);
 	}
 		printf("\n");
-	for(i=0;i<=baris;i++){
+	for(i=1;i<baris;i++){
         printf("%d\t", i);
 		for(j=0;j<=kolom;j++){
-			printf("%c\t",PCB_routing[i][j]);
+			printf("%c\t",PCB_routing[i][j+1]);
 		}
 		printf("\n");
 	}
