@@ -244,8 +244,7 @@ void printMatrix(char matr[40][40][3], int row, int col){ //Prosedur Menampilkan
         printf("%s\t",matr[i][j]);
     }
     printf("\n");
-}
-printf("\n");
+	}
 }
 
 

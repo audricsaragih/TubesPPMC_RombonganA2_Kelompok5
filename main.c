@@ -133,8 +133,7 @@ int main() {
 					MenuUtama = askMenuUtama();
 				}
 			}
-			save_program(layout,klm,brs);
-			printf("Proyek telah disimpan\n");
+			save_program(layout, routing, klm, brs, namaProyek);
 		}
 
 		else if(Menu == 2) {
@@ -180,8 +179,7 @@ int main() {
 					MenuUtama = askMenuUtama();
 				}
 			}
-			save_program(layout,klm,brs);
-			printf("Proyek telah disimpan\n");
+			save_program(layout, routing, klm, brs, namaProyek);
 		}
 	} while(Menu != 3); 
 

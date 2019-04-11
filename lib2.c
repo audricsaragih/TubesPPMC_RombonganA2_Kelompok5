@@ -47,7 +47,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 	i=0;
 	while(strcmp(arr[i-1],"Q")||strcmp(arr[i-1],"q")){
 		printf("Koordinat y,x : ");
-		scanf("%s",&point);
+		scanf("%s",point);
 		scanf("%c",&temp);
 
 		strcpy(arr[i],point);
@@ -61,12 +61,12 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 			while(valid == 0){
 				printf("Simbol yang dipilih tidak tepat, input kembali simbol : ");
 				printf("Pilih simbol (!,@,#,$,%,^,&,*,(,)) : ");
-				scanf("%c",simbol);
+				scanf("%c",&simbol);
 				valid = validasi_simbol(simbol);
 			}
 			printf("Koordinat x, y : ");
 			i=0;
-			scanf("%s",&point);
+			scanf("%s",point);
 			scanf("%c",&temp);
 			strcpy(arr[i],point);
 			N = strlen (arr[i]);
@@ -120,7 +120,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 					else {
 						printf("titik koordinat yang dipilih berada di noda berbeda, input kembali koordinat :\n");
 						printf("Koordinat y, x: ");
-						scanf("%s",&point);
+						scanf("%s",point);
 						strcpy(arr[i-1],point);
 						scanf("%c",&temp);
 						N = strlen (arr[i-1]);
@@ -201,29 +201,37 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 	
 }	
 
-void save_program(char PCB_layout [40][40][3],int PCB_lebar, int PCB_panjang){
-	char string_layout[100];
+void save_program(char PCB_layout [40][40][3], char PCB_routing [40][40], int PCB_lebar, int PCB_panjang, char n[20]){
+	char nl[30], nr[30];
 	int i,j;
-
-	FILE *fin=fopen("Filter_RC_sederhana_layout.csv","w");
+	
+	strcpy(nl, n);
+	strcpy(nr, n);
+	
+	strcat(nl, "_layout.csv");
+	FILE *fin=fopen(nl,"w+");
 
 	for (i=0;i<=PCB_panjang;i++){
 		for(j=0;j<=PCB_lebar;j++){
-			fprintf(fin,"%s,",PCB_layout[i][j]);
+			fprintf(fin,"%s;",PCB_layout[i][j]);
 		}
 		fprintf(fin,"\n");
 	}
 	fclose(fin);
+	printf("Proyek layout telah disimpan sebagai %s\n", nl);
 	
-	FILE *finn=fopen("Filter_RC_sederhana_routing.csv","w");
+	strcat(nr, "_routing.csv");
+	FILE *finn=fopen(nr,"w+");
 	for(i=0;i<=PCB_panjang;i++){
 		for(j=0;j<=PCB_lebar;j++){
-			fprintf(finn,"%c,",PCB_layout[i][j]);
+			fprintf(finn,"%c;",PCB_routing[i][j]);
 		}
 		fprintf(finn,"\n");
 	}
 	fclose(finn);
+	printf("Proyek routing telah disimpan sebagai %s\n", nr);
 }
+
 int validasi_simbol(char simbol){
 	if (simbol =='!'||simbol =='@'||simbol =='#'||simbol =='$'||simbol =='%'||simbol =='^'||simbol =='&'||simbol =='*'||simbol =='('||simbol ==')'){
 		return 1;
