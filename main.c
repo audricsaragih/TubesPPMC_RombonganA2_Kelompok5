@@ -137,7 +137,7 @@ int main() {
 		}
 
 		else if(Menu == 2) {
-			loadProject(layout, routing);
+			loadProject(layout, routing, namaProyek);
 			
 			MenuUtama = askMenuUtama();
 			while ((MenuUtama < 1) || (MenuUtama > 8)) {

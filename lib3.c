@@ -29,9 +29,9 @@ void tampilkanRouting(char r[40][40], int brs, int klm) {
 	}
 }
 
-void loadProject(char l[40][40][3], char r[40][40]) {
+void loadProject(char l[40][40][3], char r[40][40], char nama[20]) {
 	char lay, rou;
-	char nama[20], namal[20], namar[20];
+	char namal[20], namar[20];
 	
 	printf("\n");
 	printf("====== Memuat Proyek Lama ======\n");
