@@ -239,6 +239,76 @@ void printMatrix(char matr[40][40][6], int row, int col){ //Prosedur Menampilkan
 }
 printf("\n");
 }
+void loadLayout(char PCB_layout[40][40][6],int PCB_lebar,int PCB_panjang){
+	FILE *file1;
+	FILE *file2;
+	int i,j,k,lebar;
+	char baca_layout[40][100];
+	char nama_file[50];
+	int index_arr, idx, baris, kolom;
 
+
+	file1 = fopen("FILTERRCLAYOUT.csv","r");
+
+	//check if the file pointer is null
+	lebar=0;
+	if (file1 == NULL){
+		printf("File tidak dapat dibuka");
+	}
+
+	else {
+		while(fgets(baca_layout[lebar],50,file1) != NULL){
+			lebar = lebar+1;
+		}
+	}
+	fclose(file1);
+	for(i=0;i<40;i++){
+		for(j=0;j<40;j++){
+			strcpy(PCB_layout[i][j]," ");
+		}
+	}
+
+		i=0;  baris=0; index_arr =0;
+	while(i<lebar){
+		kolom =0;idx=0;
+		while(baca_layout[i][idx]!='\n'){
+			if(baca_layout[i][idx]==' '){
+				PCB_layout[baris][kolom][index_arr]=' ';
+			//printf("(%d,%d,%d) %c\n", baris,kolom,index_arr,PCB_layout[baris][kolom][index_arr]);
+			}
+			else if(baca_layout[i][idx]!=',' ){
+				PCB_layout[baris][kolom][index_arr]=baca_layout[i][idx];
+				//printf("\n%s\n", PCB_layout[0][2]);
+				//printf("(%d,%d,%d) %c\n", baris,kolom,index_arr,PCB_layout[baris][kolom][index_arr]);
+				index_arr++;
+			}
+			else if(baca_layout[i][idx]==','){
+				//printf("\n%s\n", PCB_layout[0][2]);
+				index_arr=0;
+				kolom++;
+			}
+			//printf("\n%s\n", PCB_layout[0][2]);
+			idx++;
+		}
+		//printf("\n%s\n", PCB_layout[0][2]);
+		baris++;
+		i++;
+	}
+	kolom = PCB_panjang;
+	baris = PCB_lebar;
+	//ngeprint
+	   for(k = 0; k<=kolom; k++) {
+		printf("%d\t", k);
+	}
+	printf("\n");
+	for(i=1;i<=baris;i++){
+            printf("%d\t", i);
+		for(j=0;j<=kolom;j++){
+			printf("%s\t",PCB_layout[i-1][j]);
+		}
+		printf("\n");
+	}
+		printf("\n");
+}
 
 

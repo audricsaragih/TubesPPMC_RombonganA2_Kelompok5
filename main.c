@@ -70,6 +70,12 @@ int main() {
 			printf("Masukkan ukuran PCB NxM (N,M < 40) : ");
 			scanf("%d %d", &brs, &klm);
 			printf("\n");
+            while ((brs < 1) || (brs > 39) || (klm < 1) || (klm > 39)) {
+                printf("Ukuran PCB tidak tepat! Ukuran PCB harus diantara 0 dan 40\n");
+                printf("Masukkan ukuran PCB NxM (N,M < 40) : ");
+                scanf("%d %d", &brs, &klm);
+                printf("\n");
+            }
 
 			//inisialisasi array layout kosong
 			for(int i = 0; i < 40; i++) {
@@ -108,12 +114,20 @@ int main() {
 					routingManual(routing,klm,brs);
 					MenuUtama = askMenuUtama();
 				}
+                else if (MenuUtama==5) {
+					loadLayout(routing,brs,klm);
+					MenuUtama = askMenuUtama();
+				}
+				else if (MenuUtama==6) {
+					printf("---Menu Routing Otomatis saat ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
 				else if (MenuUtama==7) {
-					printf("maaf gabisa :( \n");
+					printf("---Menu Design Rule Checker saat ini tidak tersedia---\n");
 					MenuUtama = askMenuUtama();
 				}
 			}
-			save_program(layout,routing,klm,brs);
+			save_program(layout,routing,klm,brs,namaProyek);
 		}
 
 		else if(Menu == 2) {
@@ -142,12 +156,20 @@ int main() {
 					routingManual(routing,klm,brs);
 					MenuUtama = askMenuUtama();
 				}
+				else if (MenuUtama==5) {
+					loadLayout(routing,brs,klm);
+					MenuUtama = askMenuUtama();
+				}
+				else if (MenuUtama==6) {
+					printf("---Menu routing otomatis ini tidak tersedia---\n");
+					MenuUtama = askMenuUtama();
+				}
 				else if (MenuUtama==7) {
-					printf("maaf gabisa  \n");
+					printf("---Menu Deisgn Rule Checker ini tidak tersedia---\n");
 					MenuUtama = askMenuUtama();
 				}
 			}
-			save_program(layout,routing,klm,brs);
+			save_program(layout,routing,klm,brs,namaProyek);
 		}
 	} while(Menu != 3);
 

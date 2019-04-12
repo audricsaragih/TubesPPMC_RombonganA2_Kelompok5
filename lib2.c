@@ -63,7 +63,7 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 				scanf("%c",simbol);
 				valid = validasi_simbol(simbol);
 			}
-			printf("Koordinat x, y : ");
+			printf("Koordinat y,x : ");
 			i=0;
 			scanf("%s",&point);
 			scanf("%c",&temp);
@@ -98,7 +98,6 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 				}
 			}
 			sscanf(arr[i], "%d %d", &koordinat[i].y, &koordinat[i].x);
-			printf("koordinat y, x  adalah: %d, %d \n", koordinat[i].y, koordinat[i].x);
 			i=i+1;
 			// perlu dua titik koordinat yang dinput agar bisa membuat noda
 			if (i>1){
@@ -110,7 +109,6 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 				else {
 					valid = 0;
 				}
-				printf("validasi %d\n",valid);
 				// validasi apakah koordinat berada di noda yang sama
 				while (valid==0){
 					if(!strcmp(arr[i-1],"N") || !strcmp(arr[i-1],"n")){ // ketika inputan n ia akan ke noda baru
@@ -203,12 +201,10 @@ void routingManual(char PCB_routing[40][40], int PCB_lebar, int PCB_panjang){
 
 }
 
-void save_program(char PCB_layout [40][40][6],char PCB_routing[40][40]  ,int PCB_lebar, int PCB_panjang){
-	char nama[100], namaL[100], namaR[100];
+void save_program(char PCB_layout [40][40][6],char PCB_routing[40][40]  ,int PCB_lebar, int PCB_panjang,char nama[20]){
+	char namaL[100], namaR[100];
 	int i,j;
 
-	printf("Masukkan nama File untuk disimpan: ");
-	scanf("%s",&nama);
 	strcpy(namaL,nama);
 	strcpy(namaR,nama);
 	strcat(namaL,"_layout.csv");

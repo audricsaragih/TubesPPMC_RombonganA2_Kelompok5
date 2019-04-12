@@ -15,5 +15,6 @@ typedef struct{
 
 void interfaceLayout(component_t *c,char matrix[40][40][6],int baris, int kolom);
 void printMatrix(char matr[40][40][6], int row, int col);
+void loadLayout(char PCB_layout[40][40][6],int PCB_lebar,int PCB_panjang);
 #endif
 
